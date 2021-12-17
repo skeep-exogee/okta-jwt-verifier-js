@@ -164,6 +164,21 @@ const verifier = new OktaJwtVerifier({
 });
 ```
 
+## Custom Key Cache (Loading keys from local file, environment variable, or other externals)
+
+The `getKeysInterceptor` property can be used to fetch keys before sending a request to the `jwksUri` endpoint. This can be helpful when wanting to load keys from a file, env variable, or an external cache.
+
+```javascript
+  const verifier = new OktaJwtVerifier({
+    issuer: 'https://{yourOktaDomain}',
+    clientId: '{clientId}',
+    getKeysInterceptor: () => {
+      const file = fs.readFileSync(jwksFile);
+      return file.keys;
+    }
+  });
+```
+
 ## Caching & Rate Limiting
 
 * By default, found keys are cached by key ID for one hour. This can be configured with the `cacheMaxAge` option for cache entries.

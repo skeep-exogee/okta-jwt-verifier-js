@@ -96,6 +96,13 @@ declare namespace OktaJwtVerifier {
      * Read more: https://github.com/okta/okta-oidc-js/tree/master/packages/jwt-verifier#caching--rate-limiting
      */
     jwksRequestsPerMinute?: number;
+    /**
+     * Loading keys from local file, environment variable, or other externals
+     *
+     * Uses getKeysInterceptor to allow users to retrieve keys from a file,
+     * external cache, or provided object before falling back to the jwksUri endpoint
+     */
+    getKeysInterceptor?(): Promise<JwtHeader[]>;
   }
 
   type Algorithm =
